@@ -9,12 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.ArrayList;
-
-
 
 @Service
-public class EpicService {
+public class EpicService implements EpicInterface {
 
     private final EpicRepository epicRepository;
     private final ProductBacklogRepository productBacklogRepository;
@@ -64,17 +61,7 @@ public class EpicService {
                 .orElseThrow(() -> new RuntimeException("Aucune Epic trouvée avec l'ID: " + epicId));
 
         userStory.setEpic(epic);
-        userStory.setEpic(epic);
-
-        if (epic.getUserStories() == null) {
-            epic.setUserStories(new ArrayList<>());
-        }
-        epic.getUserStories().add(userStory);
-
-        userStoryRepository.save(userStory);
-        epicRepository.save(epic);
-
-        return userStory;
+        return userStoryRepository.save(userStory);
     }
 
     public List<UserStory> getUserStoriesByEpicId(Long epicId) {

@@ -27,5 +27,4 @@ public class Project {
     @JoinColumn(name = "product_backlog_id", referencedColumnName = "id")
     private ProductBacklog productBacklog;
 
-
 }
